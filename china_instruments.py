@@ -83,9 +83,6 @@ def fetch_instruments(page):
             update_Mongodb(mongodbConn, curstart, '', 0)
             return resHtml 
 
-    # for site in sites:
-        # logging.info('%s' % site.decode('utf-8'))
-
 
 if __name__ == '__main__':
 
