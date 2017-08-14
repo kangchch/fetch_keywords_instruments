@@ -89,13 +89,13 @@ if __name__ == '__main__':
     mongodbConn = pymongo.MongoClient('192.168.60.65', 10010)
     pages = getpage_Mongodb(mongodbConn)
     for page in pages:
-        time.sleep(2)
+        time.sleep(1)
         response = fetch_instruments(page)
         if not response:
             logging.error('fetch failed! failed page = %d' % (page))
             update_Mongodb(mongodbConn, page, '', 0)
         else:
-            response = response.encode('utf-8')
+            response = response.encode('utf-8') #不加这一句抓取失败
             keywords = r'(?<=\d\.).*(?= 国)'
             sites = re.findall(keywords, response)
             if 0 == len(sites):
