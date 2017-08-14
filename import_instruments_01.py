@@ -96,7 +96,7 @@ if __name__ == '__main__':
             update_Mongodb(mongodbConn, page, '', 0)
         else:
             response = response.encode('utf-8')
-            keywords = r'(?=\d+\.).*(?= 国)'
+            keywords = r'(?<=\d\.).*(?= 国)'
             sites = re.findall(keywords, response)
             if 0 == len(sites):
                 update_Mongodb(mongodbConn, page, '', 0)

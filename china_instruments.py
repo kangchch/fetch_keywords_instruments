@@ -98,7 +98,7 @@ if __name__ == '__main__':
             logging.error('fetch failed! failed page = %d' % (page))
             update_Mongodb(mongodbConn, page, '', 0)
         else:
-            keywords = r'>\d+\.(.*?)\s'
+            keywords = r'(?<=\d\.)(.*?)\s'
             sites = re.findall(keywords, response)
             if 0 == len(sites):
                 update_Mongodb(mongodbConn, page, '', 0)
