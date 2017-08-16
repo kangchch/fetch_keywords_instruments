@@ -1,23 +1,23 @@
 
-from pymongo import MongoClient
-import datetime
-import re
-import os
-
+# coding:utf-8
+import csv
+import codecs
 import sys
+
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-if __name__ == '__main__':
+csvfile = codecs.open('import_1.csv', 'rb', 'utf-8')
+reader = csv.reader(csvfile)
 
-    fp_medical = open('medical_china.csv', 'wb')
-    mongo_db = MongoClient('192.168.60.65', 10010).medical_instruments
-    mongo_db_tbl = mongo_db.medical_instruments_tbl
+csvfile_w = codecs.open('export.csv', 'wb', 'utf-8')
+writer = csv.writer(csvfile_w)
 
-    all_keywords = [keywords['keywords'] for keywords in mongo_db_tbl.find({})]
+for index, line in enumerate(reader):
+    if index == 0 or not line:
+        continue
+    s = line[0].decode('utf-8', 'ignore')
+    pos = s.rfind(u' (')
+    writer.writerow((s[:pos], s[pos+2:]))
 
-
-
-
-    fp_medical.close()
 
